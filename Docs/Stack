@@ -27,3 +27,4 @@
 	•	Express + React static assets + SQLite volume mount. Single container, single port. docker run -p 3000:3000 -v ./data:/data.
 
 may try tauri later
+nginx and multi user expansion would be next
