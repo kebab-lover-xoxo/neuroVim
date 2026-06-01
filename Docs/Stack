@@ -1,0 +1,30 @@
+## React + TypeScript
+
+	•	Mature UI ecosystem, graph libraries, intentionally minimal three-archetype interface well within range.
+
+## Vite
+
+	•	Fast HMR, minimal config, builds static assets served by Express.
+
+##Express
+
+	•	Thin Node server. Serves React bundle and exposes API routes for DB and FSRS. Single process, trivially containerized.
+
+## better-sqlite3
+
+	•	Synchronous SQLite binding for Node. Fastest JS SQLite option, WAL mode, full constraint enforcement. Single file on a Docker volume.
+
+## Drizzle ORM
+
+	•	Schema-as-code, type-safe queries, direct SQL output, migration runner. Maps 1:1 to the schema already designed.
+
+## ts-fsrs
+
+	•	Maintained TypeScript FSRS-5 port. 19 weights, scheduler and optimizer both included. Runs in the same Node process as Express — no sidecar, no IPC, no boundary.
+
+## Docker
+
+	•	Express + React static assets + SQLite volume mount. Single container, single port. docker run -p 3000:3000 -v ./data:/data.
+
+may try tauri later
+nginx and multi user expansion would be next
