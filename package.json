@@ -1,0 +1,41 @@
+{
+  "name": "neurovim-workspace",
+  "private": true,
+  "packageManager": "pnpm@8.9.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build:core": "pnpm --filter @mnemo/core run build",
+    "build:web": "pnpm --filter @mnemo/web run build",
+    "build:ui": "pnpm --filter @mnemo/ui run build",
+    "build": "pnpm run build:core && pnpm run build:web && pnpm run build:ui",
+    "dev:docker": "concurrently \"pnpm --filter @mnemo/web run dev\" \"pnpm --filter @mnemo/ui run dev\"",
+    "dev": "pnpm run dev:docker",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "drizzle-kit": "^0.43.0",
+    "drizzle-orm": "^0.44.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.1"
+  }
+}

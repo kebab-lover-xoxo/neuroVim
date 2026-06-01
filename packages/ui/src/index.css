@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.app-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.app-nav nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.app-nav a {
+  color: #8b949e;
+  text-decoration: none;
+}
+
+.app-nav a.active {
+  color: #58a6ff;
+}
+
+main {
+  width: min(90vw, 60rem);
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.welcome-card {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: #0d1117;
+  border-radius: 0.75rem;
+}
+
+h1 {
+  margin: 0;
+  color: #58a6ff;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+code {
+  background: #010409;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.35rem;
+}

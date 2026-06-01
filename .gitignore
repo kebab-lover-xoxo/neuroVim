@@ -1,0 +1,17 @@
+node_modules
+.pnpm
+dist
+**/dist
+**/node_modules
+.env
+.DS_Store
+.vscode
+.idea
+/data
+data
+npm-debug.log*
+pnpm-debug.log*
+coverage
+*.db
+*.db-wal
+*.db-shm

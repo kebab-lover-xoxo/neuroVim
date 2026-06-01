@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  mnemo:
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - DB_PATH=/data/mnemo.db
+    volumes:
+      - './data:/data'
+      - './packages/ui:/app/packages/ui:cached'
+      - './apps/web:/app/apps/web:cached'
+      - './server:/app/server:cached'
+    command: ["sh", "-c", "corepack pnpm --filter @mnemo/web run dev & corepack pnpm --filter @mnemo/ui run dev"]

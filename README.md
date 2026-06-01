@@ -38,3 +38,53 @@ I will also be adding ai but, to solve a slightly different problem,
 The idea is to design an ai with intentional constraints that prevent it from answer leaking and force a "Socratic Scaffolder" Now it answers a question with a question, but this question targets link in a user's knowledge chain of a system or topic.
 
 ---
+
+## Sprint 0 — Ready for Flight ✅
+
+The foundational infrastructure is complete:
+
+### Monorepo Structure
+- **packages/core** — TypeScript library with SQLite integration, FSRS types, and database initialization
+- **packages/ui** — React + Vite app with client-side routing for three archetype panes (Notes, Working, Recall)
+- **apps/web** — Express server serving the static UI and providing health/info API endpoints
+- **Workspace Protocol** — All local dependencies resolve through `workspace:*` with a single `pnpm-lock.yaml`
+
+### Database & Persistence
+- **SQLite v3 Schema** — 12 tables (topics, notes, cards, sessions, reviews, fsrs_params, etc.) with FK constraints and indexes
+- **WAL Mode** — Write-Ahead Logging enabled on every connection for concurrent read/write support
+- **FSRS-5 Seed** — Default weight set seeded at startup; seeds idempotently via migration
+- **Volume Mount** — `./data:/data` in Docker ensures database survives container restarts/rebuilds
+
+### Containerization
+- **Multi-stage Dockerfile** — Builder stage compiles all packages; runner stage serves static UI + API
+- **Docker Compose** — Production and dev configs with hot reload, Vite HMR, and source volume mounts
+- **Port 3000** — Single exposed port for the full stack
+
+### Developer Tooling
+- **TypeScript** — `strict: true` enforced across all packages; `tsc --noEmit` baseline established
+- **ESLint** — @typescript-eslint/recommended + react-hooks/rules-of-hooks configured
+- **Prettier** — Project-specific style rules (singleQuote, no semi, 100 char line width)
+- **Scripts** — `pnpm typecheck`, `pnpm lint`, `pnpm format:check` for CI/pre-commit
+
+### Routes & UI
+- `/notes` — Notes archetype stub
+- `/working` — Working archetype stub
+- `/recall` — Recall archetype stub
+- `/api/health` — Server health endpoint
+- `/api/info` — App info endpoint
+
+## Setup
+
+```bash
+# From the repository root (/workspaces/neuroVim)
+corepack enable
+pnpm install
+
+# Development
+docker compose up --build
+
+# Type-check, lint, format
+pnpm typecheck && pnpm lint && pnpm format:check
+```
+
+Access the app at `http://localhost:3000` after the container starts.
