@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "../..",
     "module": "NodeNext",
     "esModuleInterop": true,
     "types": ["node"]
   },
-  "include": ["src"]
+  "include": ["src", "../../packages/core/src"]
 }

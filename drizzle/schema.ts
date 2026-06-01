@@ -2,23 +2,30 @@ import { json, sqliteTable, text, integer, real, timestamp, sql, index } from 'd
 
 export const topics = sqliteTable('topics', {
   id: text('id').primaryKey(),
-  title: text('title').notNull(),
+  parent_id: text('parent_id').references(() => topics.id),
   depth: integer('depth').notNull().check(sql`depth BETWEEN 0 AND 2`),
+  name: text('name').notNull(),
+  slug: text('slug').notNull(),
+  position: integer('position').notNull().default(0),
   created_at: timestamp('created_at').notNull().defaultNow()
 });
 
 export const tags = sqliteTable('tags', {
   id: text('id').primaryKey(),
-  name: text('name').notNull(),
+  name: text('name').notNull().unique(),
+  color: text('color').notNull(),
   created_at: timestamp('created_at').notNull().defaultNow()
 });
 
 export const notes = sqliteTable('notes', {
   id: text('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
   topic_id: text('topic_id').references(topics.id),
-  created_at: timestamp('created_at').notNull().defaultNow()
+  title: text('title').notNull(),
+  body: text('body').notNull(),
+  summary: text('summary'),
+  category: text('category').notNull().default('vocab').check(sql`category IN ('vocab','thinking','complex')`),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow()
 });
 
 export const note_tags = sqliteTable('note_tags', {

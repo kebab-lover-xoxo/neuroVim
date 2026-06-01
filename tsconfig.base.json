@@ -1,8 +1,17 @@
 {
   "compilerOptions": {
+    "types": ["node"],
+    "ignoreDeprecations": "6.0",
     "target": "ES2022",
     "module": "ES2020",
     "moduleResolution": "nodenext",
+    "baseUrl": ".",
+    "paths": {
+      "@mnemo/core": ["packages/core/src"],
+      "@mnemo/core/*": ["packages/core/src/*"],
+      "@mnemo/ui": ["packages/ui/src"],
+      "@mnemo/ui/*": ["packages/ui/src/*"]
+    },
     "resolveJsonModule": true,
     "isolatedModules": true,
     "strict": true,

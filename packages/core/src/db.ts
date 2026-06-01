@@ -1,12 +1,16 @@
 import fs from 'fs';
-import path from 'path';
+import path from 'path'; // Ensure path module is imported
 import Database from 'better-sqlite3';
 
+type Sqlite = any;
+
+const repoRoot = path.resolve(__dirname, '..', '..', '..');
+
 export function resolveDatabasePath(): string {
-  return process.env.DB_PATH || path.resolve(process.cwd(), 'data', 'mnemo.db');
+  return process.env.DB_PATH || path.resolve(repoRoot, 'data', 'mnemo.db');
 }
 
-export function createDatabase(dbPath?: string) {
+export function createDatabase(dbPath?: string): any {
   const resolvedPath = dbPath || resolveDatabasePath();
   const dataDir = path.dirname(resolvedPath);
 
@@ -25,13 +29,13 @@ export function createDatabase(dbPath?: string) {
   return { sqlite, path: resolvedPath };
 }
 
-export function ensureFsrsParamsSeeded(sqlite: Database) {
-  const activeCount = sqlite.prepare('SELECT COUNT(*) AS count FROM fsrs_params WHERE active = 1').get();
+export function ensureFsrsParamsSeeded(sqlite: Sqlite) {
+  const activeCount: any = sqlite.prepare('SELECT COUNT(*) AS count FROM fsrs_params WHERE active = 1').get();
   if (!activeCount || activeCount.count !== 1) {
     throw new Error('Expected exactly one active fsrs_params row after migration and seed.');
   }
 
-  const weightsLength = sqlite.prepare('SELECT json_array_length(weights) AS length FROM fsrs_params WHERE active = 1').get();
+  const weightsLength: any = sqlite.prepare('SELECT json_array_length(weights) AS length FROM fsrs_params WHERE active = 1').get();
   if (!weightsLength || weightsLength.length !== 19) {
     throw new Error('Expected exactly 19 FSRS weights in active fsrs_params row.');
   }

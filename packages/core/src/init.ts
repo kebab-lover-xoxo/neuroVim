@@ -1,9 +1,12 @@
 import { execSync } from 'child_process';
+import path from 'path';
 import { createDatabase, ensureFsrsParamsSeeded } from './db';
 
-export function initializeDatabase() {
+const repoRoot = path.resolve(__dirname, '..', '..', '..');
+
+export function initializeDatabase(): { sqlite: any } {
   execSync('pnpm exec drizzle-kit migrate --config drizzle.config.ts', {
-    cwd: process.cwd(),
+    cwd: repoRoot,
     stdio: 'inherit'
   });
 
